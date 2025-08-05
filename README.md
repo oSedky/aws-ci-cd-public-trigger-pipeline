@@ -12,7 +12,7 @@ Enable unauthenticated external users to trigger an internal CI/CD pipeline secu
 
 ## ⚙️ Architecture Overview
 
-![Architecture](./00-architecture-ci-cd-public-trigger.png)
+![Architecture](./screenshots/01-architecture.png)
 
 ---
 
@@ -30,59 +30,59 @@ Enable unauthenticated external users to trigger an internal CI/CD pipeline secu
 
 ## 🛠️ Implementation Steps (Visual Evidence Included)
 
-1. **API Gateway - /trigger Resource**
-   ![01](./01-API-Gateway-POST-Trigger-Resource.png)  
+1. **API Gateway - /trigger Resource**  
+   ![01](./screenshots/02-api-post.png)  
    *01 - The POST method configured under the /trigger resource.*
 
-2. **Stage Deployment Confirmation**
-   ![02](./02-API-Gateway-Stage-Prod-URL.png)  
+2. **Stage Deployment Confirmation**  
+   ![02](./screenshots/03-stage-url.png)  
    *02 - API Gateway production stage deployed with invoke URL.*
 
-3. **Lambda Handler – `PublicTriggerPipelineStart`**
-   ![03](./03-Lambda-PublicTriggerPipelineStart-Code.png)  
+3. **Lambda Handler – `PublicTriggerPipelineStart`**  
+   ![03](./screenshots/04-lambda-code.png)  
    *03 - Python code enforces per-IP limits and triggers CodePipeline.*
 
-4. **Lambda Trust Policy**
-   ![04](./04-Lambda-Execution-Role-TrustPolicy.png)
+4. **Lambda Trust Policy**  
+   ![04](./screenshots/05-trust-policy.png)
 
-5. **Inline Policies Applied**
-   ![05](./05-Lambda-Execution-Role-Inline-Policies.png)
+5. **Inline Policies Applied**  
+   ![05](./screenshots/06-inline-policies.png)
 
-6. **InvokeTriggerPolicy**
-   ![06](./06-Invoke-Trigger-Policy.png)
+6. **InvokeTriggerPolicy**  
+   ![06](./screenshots/07-invoke-policy.png)
 
-7. **AllowDynamoDBUsagePolicy**
-   ![07](./07-Allow-DynamoDB-Usage-Policy.png)
+7. **AllowDynamoDBUsagePolicy**  
+   ![07](./screenshots/08-dynamodb-policy.png)
 
-8. **PublishTriggerAlertPolicy**
-   ![08](./08-Publish-Trigger-Alert-Policy.png)
+8. **PublishTriggerAlertPolicy**  
+   ![08](./screenshots/09-sns-policy.png)
 
-9. **CloudWatch Log – Successful Execution**
-   ![09](./09-CloudWatch-Log-Success.png)
+9. **CloudWatch Log – Successful Execution**  
+   ![09](./screenshots/10-success-log.png)
 
-10. **CloudWatch Log – Rate Limited**
-   ![10](./10-CloudWatch-Log-RateLimitExceeded.png)
+10. **CloudWatch Log – Rate Limited**  
+   ![10](./screenshots/11-ratelimit-log.png)
 
-11. **DynamoDB Table Schema**
-   ![11](./11-DynamoDB-Table-Schema.png)
+11. **DynamoDB Table Schema**  
+   ![11](./screenshots/12-schema.png)
 
-12. **TTL Attribute Enabled**
-   ![12](./12-DynamoDB-TTL-Enabled.png)
+12. **TTL Attribute Enabled**  
+   ![12](./screenshots/13-ttl-enabled.png)
 
-13. **Sample Table Records with TTL**
-   ![13](./13-DynamoDB-Item-View.png)
+13. **Sample Table Records with TTL**  
+   ![13](./screenshots/14-item-view.png)
 
-14. **SNS Topic Configuration**
-   ![14](./14-SNS-Topic-TriggerAlerts.png)
+14. **SNS Topic Configuration**  
+   ![14](./screenshots/15-sns-topic.png)
 
-15. **Trigger Email Received**
-   ![15](./15-SNS-Email-Received.png)
+15. **Trigger Email Received**  
+   ![15](./screenshots/16-sns-email.png)
 
-16. **Trigger Execution - cURL Success**
-   ![16](./16-cURL-Trigger-Success.png)
+16. **Trigger Execution - cURL Success**  
+   ![16](./screenshots/17-curl-success.png)
 
-17. **Trigger Denied - Rate Limit Hit**
-   ![17](./17-cURL-Trigger-RateLimited.png)
+17. **Trigger Denied - Rate Limit Hit**  
+   ![17](./screenshots/18-curl-blocked.png)
 
 ---
 
